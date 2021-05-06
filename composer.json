@@ -1,0 +1,11 @@
+{
+    "name": "lukaslangen/unit-testing-workshop-practice-examples",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Lukas Langen",
+            "email": "lukas@langen.dev"
+        }
+    ],
+    "require": {}
+}
