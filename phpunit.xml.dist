@@ -6,7 +6,7 @@
     </include>
   </coverage>
   <testsuites>
-    <testsuite name="Tests\\">
+    <testsuite name="LukasLangen\\Workshop\\UnitTesting\\Tests\\">
       <directory>./test</directory>
     </testsuite>
   </testsuites>

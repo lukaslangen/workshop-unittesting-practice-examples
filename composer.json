@@ -1,11 +1,28 @@
 {
-    "name": "lukaslangen/unit-testing-workshop-practice-examples",
-    "type": "project",
-    "authors": [
-        {
-            "name": "Lukas Langen",
-            "email": "lukas@langen.dev"
-        }
-    ],
-    "require": {}
+  "name": "lukaslangen/unit-testing-workshop-practice-examples",
+  "type": "project",
+  "description": "",
+  "authors": [
+    {
+      "name": "Lukas Langen",
+      "email": "lukas@langen.dev"
+    }
+  ],
+  "require": {
+    "php": "7.3",
+    "lcobucci/clock": "1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "LukasLangen\\Workshop\\UnitTesting\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "LukasLangen\\Workshop\\UnitTesting\\Test\\": "test/"
+    }
+  },
+  "scripts": {
+    "test": "tools/phpunit.phar"
+  }
 }
