@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace LukasLangen\Workshop\UnitTesting;
 
+use DateInterval;
+use DateTimeImmutable;
 use Lcobucci\Clock\Clock;
 
 final class FirstExample
@@ -41,8 +43,30 @@ final class FirstExample
      */
     public function getMonthsFrom(\DateTimeImmutable $from): array
     {
-        // Write your code here
+        $now = $this->clock->now()->modify('first day of');
+        $from = $from->modify('first day of');
 
-        return [];
+        $interval = new DateInterval('P1M');
+        $result = [];
+
+        do {
+            $result[] = $this->getStringForMonth($now);
+
+            $now = $now->sub($interval);
+        } while ($from <= $now);
+
+        return $result;
+    }
+
+    private function getStringForMonth(DateTimeImmutable $now): string
+    {
+        $firstOfMonth = $now->modify('first day of');
+        $lastOfMonth = $now->modify('last day of');
+
+        $current = $firstOfMonth->format('F d') . ' - ';
+        $current .= $lastOfMonth->format('F d') . ' ';
+        $current .= $now->format('Y');
+
+        return $current;
     }
 }
