@@ -33,10 +33,10 @@ final class FirstExample
      *
      *     Output:
      *     [
-     *         'April 1 - April 30',
-     *         'March 1 - March 31',
-     *         'February 1 - February 28',
-     *         'January 1 - January 31'
+     *         'April 01 - April 30 2021',
+     *         'March 01 - March 31 2021',
+     *         'February 01 - February 28 2021',
+     *         'January 01 - January 31 2021'
      *     ]
      */
     public function getMonthsFrom(\DateTimeImmutable $from): array
