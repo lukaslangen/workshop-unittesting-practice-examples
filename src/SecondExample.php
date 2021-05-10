@@ -5,11 +5,20 @@ declare(strict_types=1);
 namespace LukasLangen\Workshop\UnitTesting;
 
 use LukasLangen\Workshop\UnitTesting\Dependencies\HandlerInterface;
+use LukasLangen\Workshop\UnitTesting\Dependencies\NullHandler;
+use LukasLangen\Workshop\UnitTesting\Dependencies\RequestHandler;
+use LukasLangen\Workshop\UnitTesting\Dependencies\ResponseHandler;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+use function array_key_exists;
 
 final class SecondExample
 {
+    private const TYPE_MAPPING = [
+        'request' => RequestHandler::class,
+        'response' => ResponseHandler::class
+    ];
+
     /**
      * @var ContainerInterface
      */
@@ -50,11 +59,13 @@ final class SecondExample
      */
     public function create(string $type): HandlerInterface
     {
-        return new class implements HandlerInterface {
-            public function handle(): void
-            {
-                // do nothing
-            }
-        };
+        if (!array_key_exists($type, self::TYPE_MAPPING)) {
+            $this->logger->info("Mapping for type '$type' doesn't exist");
+            return $this->container->get(NullHandler::class);
+        }
+
+        $className = self::TYPE_MAPPING[$type];
+
+        return new $className();
     }
 }
