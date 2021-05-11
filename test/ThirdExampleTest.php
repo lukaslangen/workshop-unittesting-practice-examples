@@ -32,6 +32,26 @@ final class ThirdExampleTest extends TestCase
         $sut->updateEmailForUser(1234);
     }
 
+    /** @test */
+    public function doesNothingIfNewEmailIsEqualToOldEmail(): void
+    {
+        $email = 'test@example.org';
+
+        $emailHelper = EmailHelperDoubleFactory::createMock($this);
+        $emailHelper->expects($this->never())->method('sendEmailChangeSuccessfulMail');
+
+        $postParams = PostParamsDoubleFactory::createStub($this);
+        $postParams->method('getParam')->willReturn($email);
+
+        $repository = UserRepositoryDoubleFactory::createMock($this);
+        $repository->method('getUser')->willReturn(['email' => $email]);
+
+        $repository->expects($this->never())->method('updateEmail');
+
+        $sut = $this->getSut($emailHelper, $repository, $postParams);
+        $sut->updateEmailForUser(1234);
+    }
+
     private function getSut(
         ?EmailHelper $emailHelper = null,
         ?UserRepository $userRepository = null,
