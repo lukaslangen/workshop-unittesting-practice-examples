@@ -6,7 +6,7 @@ namespace LukasLangen\Workshop\UnitTesting\Dependencies;
 
 use function mail;
 
-final class EmailHelper
+class EmailHelper
 {
     public function sendEmailChangeSuccessfulMail(string $email): void
     {

@@ -6,7 +6,7 @@ namespace LukasLangen\Workshop\UnitTesting\Dependencies;
 
 use PDO;
 
-final class UserRepository
+class UserRepository
 {
     /**
      * @var PDO
