@@ -16,16 +16,20 @@ final class ThirdExample
         $user = $this->getDb()->query("SELECT * FROM users WHERE id = %id")->fetch(PDO::FETCH_ASSOC);
 
         // User exists?
-        if ($user) {
-            $newEmail = $_POST['email'];
+        if (!$user) {
+            return;
+        }
 
-            if ($newEmail !== $user['email']) {
-                $this->getDb()->exec("UPDATE user SET email=$newEmail WHERE id = $id");
+        $newEmail = $_POST['email'];
 
-                if (!mail($newEmail, 'Email change successful', 'Your email change was successful')) {
-                    throw new \Exception('Could not send email');
-                }
-            }
+        if ($newEmail === $user['email']) {
+            return;
+        }
+
+        $this->getDb()->exec("UPDATE user SET email=$newEmail WHERE id = $id");
+
+        if (!mail($newEmail, 'Email change successful', 'Your email change was successful')) {
+            throw new \Exception('Could not send email');
         }
     }
 
