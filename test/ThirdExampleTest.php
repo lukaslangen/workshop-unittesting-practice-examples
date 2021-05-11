@@ -69,6 +69,22 @@ final class ThirdExampleTest extends TestCase
         $sut->updateEmailForUser(1234);
     }
 
+    /** @test */
+    public function sendsSuccessEmail(): void
+    {
+        $emailHelper = EmailHelperDoubleFactory::createMock($this);
+        $emailHelper->expects($this->once())->method('sendEmailChangeSuccessfulMail');
+
+        $postParams = PostParamsDoubleFactory::createStub($this);
+        $postParams->method('getParam')->willReturn('test@example.org');
+
+        $repository = UserRepositoryDoubleFactory::createStub($this);
+        $repository->method('getUser')->willReturn(['email' => 'test2@example.org']);
+
+        $sut = $this->getSut($emailHelper, $repository, $postParams);
+        $sut->updateEmailForUser(1234);
+    }
+
     private function getSut(
         ?EmailHelper $emailHelper = null,
         ?UserRepository $userRepository = null,

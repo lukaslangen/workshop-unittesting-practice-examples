@@ -18,6 +18,11 @@ final class UserRepositoryDoubleFactory
         };
     }
 
+    public static function createStub(TestCase $testCase)
+    {
+        return self::createMock($testCase);
+    }
+
     public static function createMock(TestCase $testCase)
     {
         return $testCase->getMockBuilder(UserRepository::class)
