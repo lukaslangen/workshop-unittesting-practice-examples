@@ -12,7 +12,8 @@
     "php": "7.3",
     "lcobucci/clock": "1.2",
     "psr/log": "^1.1",
-    "psr/container": "^2.0"
+    "psr/container": "^2.0",
+    "ext-pdo": "*"
   },
   "autoload": {
     "psr-4": {
